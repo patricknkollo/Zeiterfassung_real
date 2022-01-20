@@ -6,7 +6,7 @@
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>2.6.2</version>
-		<relativePath/> <!-- lookup parent from repositories -->
+		<relativePath/> <!-- lookup parent from com.einsatzstunden.demo.repositories -->
 	</parent>
 	<groupId>com.einsatzstunden</groupId>
 	<artifactId>demo</artifactId>

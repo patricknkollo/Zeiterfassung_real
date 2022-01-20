@@ -1,12 +1,12 @@
-package services;
+package com.einsatzstunden.demo.services;
 
-import entities.Einsatz;
+import com.einsatzstunden.demo.entities.Einsatz;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
-import repositories.EinsatzRepository;
+import com.einsatzstunden.demo.repositories.EinsatzRepository;
 
 import java.sql.Timestamp;
 import java.util.List;
@@ -27,7 +27,7 @@ public class EinsatzService {
   }
   public ResponseEntity<List<Einsatz>> getAllEinsatz(){
     List<Einsatz>einsatzList= repository.findAll();
-    ResponseEntity<List<Einsatz>> responseEntity = new ResponseEntity<>(einsatzList,HttpStatus.FOUND);
+    ResponseEntity<List<Einsatz>> responseEntity = new ResponseEntity<>(einsatzList,HttpStatus.OK);
     return einsatzList!=null
         ? responseEntity
         :new ResponseEntity<List<Einsatz>>(einsatzList, HttpStatus.NOT_FOUND);

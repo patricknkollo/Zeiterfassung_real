@@ -1,4 +1,4 @@
-package entities;
+package com.einsatzstunden.demo.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.stereotype.Component;
@@ -11,19 +11,22 @@ import java.util.List;
 public class Mitarbeiter {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long mitarbeiterId;
+  private Long mitarbeiterid;
   private String name;
   private String vorname;
   @Column(length = 1)
   private String geschlecht;
   private Timestamp geburt;
   @JsonIgnore
-  @OneToMany(mappedBy = "mitarbeiter")
+  @OneToMany(
+      mappedBy = "mitarbeiter",
+      cascade = CascadeType.ALL,
+      orphanRemoval = true)
   private List<Einsatz> einsatzList;
 
-  public Mitarbeiter(Long mitarbeiterId, String name, String vorname, String geschlecht, Timestamp geburt,
+  public Mitarbeiter(Long mitarbeiterid, String name, String vorname, String geschlecht, Timestamp geburt,
       List<Einsatz> einsatzList) {
-    this.mitarbeiterId = mitarbeiterId;
+    this.mitarbeiterid = mitarbeiterid;
     this.name = name;
     this.vorname = vorname;
     this.geschlecht = geschlecht;
@@ -50,12 +53,12 @@ public class Mitarbeiter {
   public Mitarbeiter() {
   }
 
-  public Long getMitarbeiterId() {
-    return mitarbeiterId;
+  public Long getMitarbeiterid() {
+    return mitarbeiterid;
   }
 
-  public void setMitarbeiterId(Long mitarbeiterId) {
-    this.mitarbeiterId = mitarbeiterId;
+  public void setMitarbeiterid(Long mitarbeiterId) {
+    this.mitarbeiterid = mitarbeiterId;
   }
 
   public String getName() {
@@ -101,7 +104,7 @@ public class Mitarbeiter {
   @Override
   public String toString() {
     return "Mitarbeiter{" +
-        "mitarbeiterId=" + mitarbeiterId +
+        "mitarbeiterId=" + mitarbeiterid +
         ", name='" + name + '\'' +
         ", vorname='" + vorname + '\'' +
         ", geschlecht='" + geschlecht + '\'' +

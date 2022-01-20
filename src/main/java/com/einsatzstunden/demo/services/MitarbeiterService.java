@@ -1,12 +1,12 @@
-package services;
+package com.einsatzstunden.demo.services;
 
-import entities.Mitarbeiter;
+import com.einsatzstunden.demo.entities.Mitarbeiter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
-import repositories.MitarbeiterRepository;
+import com.einsatzstunden.demo.repositories.MitarbeiterRepository;
 
 import java.sql.Timestamp;
 import java.util.List;
@@ -21,7 +21,7 @@ public class MitarbeiterService {
   public ResponseEntity<Mitarbeiter> saveMitarbeiter(Mitarbeiter mitarbeiter){
     Mitarbeiter result = repository.save(mitarbeiter);
     ResponseEntity<Mitarbeiter>responseEntity = new ResponseEntity<>(result, HttpStatus.CREATED);
-    return responseEntity!=null
+    return result!=null
         ? responseEntity
         :new ResponseEntity<>(result, HttpStatus.NOT_ACCEPTABLE);
   }
@@ -84,7 +84,7 @@ public class MitarbeiterService {
       mitarbeiterOptional.get().setName(mitarbeiter.getName());
       mitarbeiterOptional.get().setVorname(mitarbeiter.getVorname());
       Mitarbeiter result = repository.save(mitarbeiterOptional.orElse(null));
-      ResponseEntity<Optional<Mitarbeiter>> responseEntity = new ResponseEntity<>(mitarbeiterOptional, HttpStatus.ACCEPTED);
+      ResponseEntity<Optional<Mitarbeiter>> responseEntity = new ResponseEntity<>(Optional.of(result), HttpStatus.ACCEPTED);
       return  responseEntity;
     }
     return  new ResponseEntity<>(mitarbeiterOptional, HttpStatus.NOT_MODIFIED);
