@@ -1,27 +1,27 @@
-package Controllers;
+package com.einsatzstunden.demo.Controllers;
 
-import entities.Einsatz;
+import com.einsatzstunden.demo.entities.Einsatz;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import services.EinsatzService;
+import com.einsatzstunden.demo.services.EinsatzService;
 
 import java.sql.Timestamp;
 import java.util.List;
 import java.util.Optional;
 
-@Controller
+
 @Component
-@RequestMapping(path = "/api/controller/einsatz")
 @CrossOrigin(origins = "http://localhost:3000")
+@Controller
+@RequestMapping(path = "/api/controller/einsatz")
 public class EinsatzController {
 
   @Autowired
   EinsatzService service;
-@RequestMapping(path = "/save", method = RequestMethod.POST)
+  @RequestMapping(path = "/save", method = RequestMethod.POST)
   public @ResponseBody ResponseEntity<Einsatz> saveEinsatz(@RequestBody Einsatz einsatz){
     return service.saveEinsatz(einsatz);
   }
@@ -29,6 +29,7 @@ public class EinsatzController {
   public @ResponseBody ResponseEntity<List<Einsatz>> getAllEinsatz(){
      return service.getAllEinsatz();
   }
+
   @RequestMapping(path = "/id/{thisid}", method = RequestMethod.GET)
   public @ResponseBody ResponseEntity<Optional<Einsatz>> getAllEinsatzById(@PathVariable("thisid") Long id){
     return service.getAllEinsatzById(id);
@@ -48,5 +49,10 @@ public class EinsatzController {
   @RequestMapping(path = "/delete/{thisid}", method = RequestMethod.DELETE)
   public void deleteEinsatz(@PathVariable("thisid") Long id){
     service.deleteEinsatz(id);
+  }
+
+  @RequestMapping(path = "/einsaetze/mitarbeiter/id/{thisid}", method = RequestMethod.GET)
+  public @ResponseBody ResponseEntity<List<Einsatz>>  getEinsaetzeOfMitarbeiter(@PathVariable("thisid") Long id){
+    return service.getEinsaetzeOfMitarbeiter(id);
   }
 }

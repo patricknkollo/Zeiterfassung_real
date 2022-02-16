@@ -1,25 +1,31 @@
-package Controllers;
+package com.einsatzstunden.demo.Controllers;
 
-import entities.Mitarbeiter;
+import com.einsatzstunden.demo.entities.Mitarbeiter;
+import com.einsatzstunden.demo.helper.EmailHelper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import services.MitarbeiterService;
+import com.einsatzstunden.demo.services.MitarbeiterService;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.sql.Timestamp;
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.CompletableFuture;
 
-@Controller
-@Component
+@RestController
 @RequestMapping(path = "/api/controller/mitarbeiter")
 @CrossOrigin(origins = "http://localhost:3000")
 public class MitarbeiterController {
 
   @Autowired
   MitarbeiterService service;
+
+  @Autowired
+  private EmailHelper emailHelper;
+
   @RequestMapping(path = "/save", method = RequestMethod.POST)
   public @ResponseBody ResponseEntity<Mitarbeiter> saveMitarbeiter(@RequestBody Mitarbeiter mitarbeiter){
     return service.saveMitarbeiter(mitarbeiter);
@@ -27,10 +33,15 @@ public class MitarbeiterController {
   @RequestMapping(path = "/all", method = RequestMethod.GET)
   public @ResponseBody ResponseEntity<List<Mitarbeiter>> getAllMitarbeiter(){
     return service.getAllMitarbeiter();
+  }
+
+  @RequestMapping(path = "/id/{thisid}", method = RequestMethod.GET)
+  public @ResponseBody ResponseEntity<Optional<Mitarbeiter>>getMitarbeiterById(@PathVariable("thisid") Long id){
+    return service.getMitarbeiterById(id);
 
   }
   @RequestMapping(path = "/id", method = RequestMethod.GET)
-  public @ResponseBody ResponseEntity<Optional<Mitarbeiter>>getMitarbeiterById(@RequestParam Long id){
+  public @ResponseBody ResponseEntity<Optional<Mitarbeiter>>getMitarbeiterById1(@RequestParam Long id){
     return service.getMitarbeiterById(id);
 
   }
@@ -61,6 +72,24 @@ public class MitarbeiterController {
   @RequestMapping(path = "/update", method = RequestMethod.PUT)
   public @ResponseBody ResponseEntity<Optional<Mitarbeiter>> UpdateMitarbeiter(@RequestParam Long id,@RequestBody Mitarbeiter mitarbeiter){
     return service.getMitarbeiterById(id);
+  }
 
+  @PostMapping(value = "/users", consumes = { MediaType.MULTIPART_FORM_DATA_VALUE}, produces = "application/json")
+  public ResponseEntity saveUsers(@RequestParam(value = "files") MultipartFile[] files) throws Exception {
+    for (MultipartFile file : files) {
+      service.saveUsers(file);
+    }
+    return ResponseEntity.status(HttpStatus.CREATED).build();
+  }
+
+  @GetMapping(value = "/users", produces = "application/json")
+  public CompletableFuture<ResponseEntity> findAllUsers() {
+    return  service.findAllUsers().thenApply(ResponseEntity::ok);
+  }
+  @RequestMapping(value = "/sendemail")
+  public String sendEmail()
+  {
+    emailHelper.sendEmail();
+    return "Email sent successfully";
   }
 }
