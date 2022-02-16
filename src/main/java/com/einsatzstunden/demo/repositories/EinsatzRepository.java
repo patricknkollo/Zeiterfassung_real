@@ -34,5 +34,6 @@ public interface EinsatzRepository extends JpaRepository<Einsatz, Long> {
       + "         where mitarbeiterid=:specific_mitarbeiterid", nativeQuery = true)
   @Transactional
   @Modifying
-  public List<Einsatz> getEinsatzByMitarbeiterId(@Param("specific_mitarbeiterid") Long name);
+  public List<Einsatz> getEinsatzByMitarbeiterId(@Param("specific_mitarbeiterid") Long id);
+
 }

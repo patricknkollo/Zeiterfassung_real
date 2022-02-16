@@ -50,4 +50,9 @@ public class EinsatzController {
   public void deleteEinsatz(@PathVariable("thisid") Long id){
     service.deleteEinsatz(id);
   }
+
+  @RequestMapping(path = "/einsaetze/mitarbeiter/id/{thisid}", method = RequestMethod.GET)
+  public @ResponseBody ResponseEntity<List<Einsatz>>  getEinsaetzeOfMitarbeiter(@PathVariable("thisid") Long id){
+    return service.getEinsaetzeOfMitarbeiter(id);
+  }
 }

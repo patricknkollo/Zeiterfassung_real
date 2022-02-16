@@ -1,12 +1,12 @@
 package com.einsatzstunden.demo.services;
 
 import com.einsatzstunden.demo.entities.Einsatz;
+import com.einsatzstunden.demo.repositories.EinsatzRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
-import com.einsatzstunden.demo.repositories.EinsatzRepository;
 
 import java.sql.Timestamp;
 import java.util.List;
@@ -67,5 +67,11 @@ public class EinsatzService {
   }
   public void deleteEinsatz(Long id){
     repository.deleteById(id);
+  }
+
+  public ResponseEntity<List<Einsatz>> getEinsaetzeOfMitarbeiter(Long id){
+    List<Einsatz> einsatzList = repository.getEinsatzByMitarbeiterId(id);
+    ResponseEntity<List<Einsatz>> responseEntity = new ResponseEntity<>(einsatzList, HttpStatus.OK);
+    return responseEntity;
   }
 }
