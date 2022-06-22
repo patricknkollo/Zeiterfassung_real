@@ -17,6 +17,8 @@ public class Mitarbeiter {
   @Column(length = 1)
   private String geschlecht;
   private Timestamp geburt;
+  private String password;
+
   @JsonIgnore
   @OneToMany(
       mappedBy = "mitarbeiter",
@@ -47,6 +49,15 @@ public class Mitarbeiter {
     this.vorname = vorname;
     this.geschlecht = geschlecht;
     this.geburt = geburt;
+    this.einsatzList = einsatzList;
+  }
+  public Mitarbeiter(String name, String vorname, String geschlecht, Timestamp geburt, String password,
+      List<Einsatz> einsatzList) {
+    this.name = name;
+    this.vorname = vorname;
+    this.geschlecht = geschlecht;
+    this.geburt = geburt;
+    this.password = password;
     this.einsatzList = einsatzList;
   }
 
@@ -101,14 +112,23 @@ public class Mitarbeiter {
     this.einsatzList = einsatzList;
   }
 
+  public String getPassword() {
+    return password;
+  }
+
+  public void setPassword(String password) {
+    this.password = password;
+  }
+
   @Override
   public String toString() {
     return "Mitarbeiter{" +
-        "mitarbeiterId=" + mitarbeiterid +
+        "mitarbeiterid=" + mitarbeiterid +
         ", name='" + name + '\'' +
         ", vorname='" + vorname + '\'' +
         ", geschlecht='" + geschlecht + '\'' +
         ", geburt=" + geburt +
+        ", password='" + password + '\'' +
         ", einsatzList=" + einsatzList +
         '}';
   }

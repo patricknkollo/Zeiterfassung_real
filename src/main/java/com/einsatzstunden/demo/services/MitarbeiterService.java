@@ -138,6 +138,7 @@ public class MitarbeiterService {
     ResponseEntity<List<Einsatz>> responseEntity = new ResponseEntity<>(einsatzList, HttpStatus.FOUND);
     return  responseEntity;
   }
+
   @Async
   public CompletableFuture<List<Mitarbeiter>> findAllUsers(){
     logger.info("get list of user by "+Thread.currentThread().getName());
