@@ -11,9 +11,11 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @SpringBootApplication
 @EnableAsync
+//@EnableSwagger2
 public class DemoApplication {
 
 	private final  static  Logger logger = LoggerFactory.getLogger(DemoApplication.class);

@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.einsatzstunden.demo.services.MitarbeiterService;
 import org.springframework.web.multipart.MultipartFile;
+import projections.MitarbeiterFullnameProjection;
 
 import java.sql.Timestamp;
 import java.util.List;
@@ -21,7 +22,7 @@ import java.util.concurrent.CompletableFuture;
 public class MitarbeiterController {
 
   @Autowired
-  MitarbeiterService service;
+  private MitarbeiterService service;
 
   @Autowired
   private EmailHelper emailHelper;
@@ -91,5 +92,10 @@ public class MitarbeiterController {
   {
     emailHelper.sendEmail();
     return "Email sent successfully";
+  }
+
+  @RequestMapping(path = "/fullname", method = RequestMethod.GET)
+  public ResponseEntity<List<MitarbeiterFullnameProjection>> findAllUsersFullname() {
+    return  service.getMitarbeiterFullName();
   }
 }

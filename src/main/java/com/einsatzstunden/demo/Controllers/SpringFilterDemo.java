@@ -25,7 +25,7 @@ public class SpringFilterDemo implements Filter {
     String path = ((HttpServletRequest)servletRequest).getRequestURI();
     logger.info("hier ist der Path:  {}     <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<", path);
     logger.info("token: ", ((HttpServletRequest) servletRequest).getAuthType());
-    if(path.contains("/api/controller/mitarbeiter/id/")){
+    if(path.contains("§$%&/")){
       String id = path.replace("/api/controller/mitarbeiter/id/", "");
       logger.info("hier ist die id:  {}", id);
       if(("112021202120212").equals(id)){
