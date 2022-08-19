@@ -1,0 +1,2 @@
+insert into mitarbeiter(name, vorname, geschlecht, geburt, password)values('musk','elon','M','1971-05-14', '111000');
+insert into mitarbeiter(name, vorname, geschlecht, geburt, password)values('malea','bell','M','1991-08-19', '11');

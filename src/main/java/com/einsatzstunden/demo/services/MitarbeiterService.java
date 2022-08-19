@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import com.einsatzstunden.demo.repositories.MitarbeiterRepository;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
+import projections.MitarbeiterFullnameProjection;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -33,115 +34,120 @@ public class MitarbeiterService {
   MitarbeiterRepository repository;
 
   @Transactional
-  public ResponseEntity<Mitarbeiter> saveMitarbeiter(Mitarbeiter mitarbeiter){
+  public ResponseEntity<Mitarbeiter> saveMitarbeiter(Mitarbeiter mitarbeiter) {
     Mitarbeiter result = repository.save(mitarbeiter);
-    ResponseEntity<Mitarbeiter>responseEntity = new ResponseEntity<>(result, HttpStatus.CREATED);
-    return result!=null
+    ResponseEntity<Mitarbeiter> responseEntity = new ResponseEntity<>(result, HttpStatus.CREATED);
+    return result != null
         ? responseEntity
-        :new ResponseEntity<>(result, HttpStatus.NOT_ACCEPTABLE);
+        : new ResponseEntity<>(result, HttpStatus.NOT_ACCEPTABLE);
   }
 
   @Transactional
-  public ResponseEntity<List<Mitarbeiter>> getAllMitarbeiter(){
-    List<Mitarbeiter>mitarbeiters = repository.findAll();
+  public ResponseEntity<List<Mitarbeiter>> getAllMitarbeiter() {
+    List<Mitarbeiter> mitarbeiters = repository.findAll();
     ResponseEntity<List<Mitarbeiter>> responseEntity = new ResponseEntity<>(mitarbeiters, HttpStatus.OK);
-    return mitarbeiters!=null
+    return mitarbeiters != null
         ? responseEntity
-        :new ResponseEntity<>(mitarbeiters, HttpStatus.NOT_FOUND);
+        : new ResponseEntity<>(mitarbeiters, HttpStatus.NOT_FOUND);
   }
 
   @Transactional
-  public ResponseEntity<Optional<Mitarbeiter>>getMitarbeiterById(Long id){
-    Optional<Mitarbeiter>mitarbeiter = repository.findById(id);
-    ResponseEntity<Optional<Mitarbeiter>>responseEntity = new ResponseEntity<>(mitarbeiter, HttpStatus.FOUND);
-    return mitarbeiter!=null
+  public ResponseEntity<Optional<Mitarbeiter>> getMitarbeiterById(Long id) {
+    Optional<Mitarbeiter> mitarbeiter = repository.findById(id);
+    ResponseEntity<Optional<Mitarbeiter>> responseEntity = new ResponseEntity<>(mitarbeiter, HttpStatus.FOUND);
+    return mitarbeiter != null
         ? responseEntity
-        :new ResponseEntity<>(mitarbeiter, HttpStatus.NOT_FOUND);
+        : new ResponseEntity<>(mitarbeiter, HttpStatus.NOT_FOUND);
   }
 
   @Transactional
-  public ResponseEntity<List<Mitarbeiter>> getMitarbeiterByName(String name){
+  public ResponseEntity<List<Mitarbeiter>> getMitarbeiterByName(String name) {
     List<Mitarbeiter> mitarbeiters = repository.getMitarbeiterByName(name);
     ResponseEntity<List<Mitarbeiter>> responseEntity = new ResponseEntity<>(mitarbeiters, HttpStatus.FOUND);
-    return mitarbeiters!=null
+    return mitarbeiters != null
         ? responseEntity
-        :new ResponseEntity<>(mitarbeiters, HttpStatus.NOT_FOUND);
+        : new ResponseEntity<>(mitarbeiters, HttpStatus.NOT_FOUND);
   }
 
   @Transactional
-  public ResponseEntity<List<Mitarbeiter>> getMitarbeiterByVorname(String vorname){
+  public ResponseEntity<List<Mitarbeiter>> getMitarbeiterByVorname(String vorname) {
     List<Mitarbeiter> mitarbeiters = repository.getMitarbeiterByVorname(vorname);
     ResponseEntity<List<Mitarbeiter>> responseEntity = new ResponseEntity<>(mitarbeiters, HttpStatus.FOUND);
-    return mitarbeiters!=null
+    return mitarbeiters != null
         ? responseEntity
-        :new ResponseEntity<>(mitarbeiters, HttpStatus.NOT_FOUND);
+        : new ResponseEntity<>(mitarbeiters, HttpStatus.NOT_FOUND);
   }
 
   @Transactional
-  public ResponseEntity<List<Mitarbeiter>> getMitarbeiterByGeschlecht(String geschlecht){
+  public ResponseEntity<List<Mitarbeiter>> getMitarbeiterByGeschlecht(String geschlecht) {
     List<Mitarbeiter> mitarbeiters = repository.getMitarbeiterByGeschlecht(geschlecht);
     ResponseEntity<List<Mitarbeiter>> responseEntity = new ResponseEntity<>(mitarbeiters, HttpStatus.FOUND);
-    return mitarbeiters!=null
+    return mitarbeiters != null
         ? responseEntity
-        :new ResponseEntity<>(mitarbeiters, HttpStatus.NOT_FOUND);
+        : new ResponseEntity<>(mitarbeiters, HttpStatus.NOT_FOUND);
   }
-  public ResponseEntity<List<Mitarbeiter>> getMitarbeiterByGeburt(Timestamp geburt){
+
+  public ResponseEntity<List<Mitarbeiter>> getMitarbeiterByGeburt(Timestamp geburt) {
     List<Mitarbeiter> mitarbeiters = repository.getMitarbeiterByGeburt(geburt);
     ResponseEntity<List<Mitarbeiter>> responseEntity = new ResponseEntity<>(mitarbeiters, HttpStatus.FOUND);
-    return mitarbeiters!=null
+    return mitarbeiters != null
         ? responseEntity
-        :new ResponseEntity<>(mitarbeiters, HttpStatus.NOT_FOUND);
+        : new ResponseEntity<>(mitarbeiters, HttpStatus.NOT_FOUND);
   }
-  public ResponseEntity<List<Mitarbeiter>>getMitarbeiterByEinsatz(Timestamp anfangzeit, Timestamp endezeit){
-    List<Mitarbeiter>mitarbeiters= repository.getMitarbeiterBySpecificEinsatz(anfangzeit, endezeit);
+
+  public ResponseEntity<List<Mitarbeiter>> getMitarbeiterByEinsatz(Timestamp anfangzeit, Timestamp endezeit) {
+    List<Mitarbeiter> mitarbeiters = repository.getMitarbeiterBySpecificEinsatz(anfangzeit, endezeit);
     ResponseEntity<List<Mitarbeiter>> responseEntity = new ResponseEntity<>(mitarbeiters, HttpStatus.FOUND);
-    return mitarbeiters!=null
+    return mitarbeiters != null
         ? responseEntity
-        :new ResponseEntity<>(mitarbeiters, HttpStatus.NOT_FOUND);
+        : new ResponseEntity<>(mitarbeiters, HttpStatus.NOT_FOUND);
   }
+
   @Transactional
-  public ResponseEntity<Optional<Mitarbeiter>> UpdateMitarbeiter(Long id, Mitarbeiter mitarbeiter){
-    Optional<Mitarbeiter>mitarbeiterOptional =repository.findById(id);
-    if(mitarbeiterOptional.isPresent()){
+  public ResponseEntity<Optional<Mitarbeiter>> UpdateMitarbeiter(Long id, Mitarbeiter mitarbeiter) {
+    Optional<Mitarbeiter> mitarbeiterOptional = repository.findById(id);
+    if (mitarbeiterOptional.isPresent()) {
       mitarbeiterOptional.get().setEinsatzList(mitarbeiter.getEinsatzList());
       mitarbeiterOptional.get().setGeburt(mitarbeiter.getGeburt());
       mitarbeiterOptional.get().setGeschlecht(mitarbeiter.getGeschlecht());
       mitarbeiterOptional.get().setName(mitarbeiter.getName());
       mitarbeiterOptional.get().setVorname(mitarbeiter.getVorname());
       Mitarbeiter result = repository.save(mitarbeiterOptional.orElse(null));
-      ResponseEntity<Optional<Mitarbeiter>> responseEntity = new ResponseEntity<>(Optional.of(result), HttpStatus.ACCEPTED);
-      return  responseEntity;
+      ResponseEntity<Optional<Mitarbeiter>> responseEntity = new ResponseEntity<>(Optional.of(result),
+          HttpStatus.ACCEPTED);
+      return responseEntity;
     }
-    return  new ResponseEntity<>(mitarbeiterOptional, HttpStatus.NOT_MODIFIED);
+    return new ResponseEntity<>(mitarbeiterOptional, HttpStatus.NOT_MODIFIED);
   }
 
   @Transactional
-  public ResponseEntity<List<Einsatz>> getAllValideEinsaetzeOfMitarbeiter(Long id){
+  public ResponseEntity<List<Einsatz>> getAllValideEinsaetzeOfMitarbeiter(Long id) {
     List<Einsatz> einsatzList = repository.findById(id)
         .get()
         .getEinsatzList()
         .stream()
-        .filter(einsatz -> einsatz.getAnfangsZeit().getTime()!=einsatz.getEndeZeit().getTime())
+        .filter(einsatz -> einsatz.getAnfangsZeit().getTime() != einsatz.getEndeZeit().getTime())
         .collect(Collectors.toList());
     ResponseEntity<List<Einsatz>> responseEntity = new ResponseEntity<>(einsatzList, HttpStatus.FOUND);
-    return  responseEntity;
+    return responseEntity;
   }
 
   @Transactional
-  public ResponseEntity<List<Einsatz>> getAllInvalideEinsaetzeOfMitarbeiter(Long id){
+  public ResponseEntity<List<Einsatz>> getAllInvalideEinsaetzeOfMitarbeiter(Long id) {
     List<Einsatz> einsatzList = repository.findById(id)
         .get()
         .getEinsatzList()
         .stream()
-        .filter(einsatz -> einsatz.getAnfangsZeit().getTime()==einsatz.getEndeZeit().getTime())
+        .filter(einsatz -> einsatz.getAnfangsZeit().getTime() == einsatz.getEndeZeit().getTime())
         .collect(Collectors.toList());
     ResponseEntity<List<Einsatz>> responseEntity = new ResponseEntity<>(einsatzList, HttpStatus.FOUND);
-    return  responseEntity;
+    return responseEntity;
   }
+
   @Async
-  public CompletableFuture<List<Mitarbeiter>> findAllUsers(){
-    logger.info("get list of user by "+Thread.currentThread().getName());
-    List<Mitarbeiter> users=repository.findAll();
+  public CompletableFuture<List<Mitarbeiter>> findAllUsers() {
+    logger.info("get list of user by " + Thread.currentThread().getName());
+    List<Mitarbeiter> users = repository.findAll();
     return CompletableFuture.completedFuture(users);
   }
 
@@ -177,5 +183,13 @@ public class MitarbeiterService {
       logger.error("Failed to parse CSV file {}", e);
       throw new Exception("Failed to parse CSV file {}", e);
     }
+  }
+
+  @Transactional
+  public ResponseEntity<List<MitarbeiterFullnameProjection>> getMitarbeiterFullName(){
+  List<MitarbeiterFullnameProjection>mitarbeiters = repository.findMitarbeiterFullName();
+  return mitarbeiters !=  null ?
+     new ResponseEntity<>(mitarbeiters, HttpStatus.FOUND):
+         new ResponseEntity<>(mitarbeiters, HttpStatus.NOT_FOUND);
   }
 }

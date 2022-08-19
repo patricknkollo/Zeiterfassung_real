@@ -1,8 +1,12 @@
 package com.einsatzstunden.demo.entities;
 
+import com.einsatzstunden.demo.helper.JsonDateSerializer;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.stereotype.Component;
+import com.fasterxml.jackson.databind.JsonSerializer;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -17,10 +21,12 @@ public class Einsatz {
 
   @CreationTimestamp
   @Temporal(TemporalType.TIMESTAMP)
+  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm a z")
   private Date anfangsZeit;
 
   @CreationTimestamp
   @Temporal(TemporalType.TIMESTAMP)
+  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm a z")
   private Date endeZeit;
 
   @JsonIgnore

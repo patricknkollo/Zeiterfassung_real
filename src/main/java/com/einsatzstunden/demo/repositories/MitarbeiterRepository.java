@@ -1,6 +1,7 @@
 package com.einsatzstunden.demo.repositories;
 
 import com.einsatzstunden.demo.entities.Mitarbeiter;
+import com.einsatzstunden.demo.entities.MitarbeiterEinsatzArbeitsplaztDto;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -8,6 +9,8 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+import projections.MitarbeiterEinsatzProjection;
+import projections.MitarbeiterFullnameProjection;
 
 import java.sql.Timestamp;
 import java.util.List;
@@ -53,4 +56,26 @@ public interface MitarbeiterRepository extends JpaRepository<Mitarbeiter,Long> {
   @Transactional
   @Modifying
   public List<Mitarbeiter> getMitarbeiterByName(@Param("specific_name") String name);
+
+  /**
+   * select mitarbeiterid, name, vorname, geschlecht, geburt, password, concat(name, ' ', vorname) as fullname"
+   *       + "         from Mitarbeiter", nativeQuery = true
+   * @return
+   */
+  @Query(value = "select mitarbeiterid, name, vorname, geschlecht, geburt, password, concat(name, ' ', vorname) as fullname, concat(name, ' ', geburt) as nameAndGeburt"
+      + "         from Mitarbeiter", nativeQuery = true
+  )
+  @Transactional
+  @Modifying
+  public List<MitarbeiterFullnameProjection> findMitarbeiterFullName();
+
+  @Query(
+      value = "select Mitarbeiter.mitarbeiterid, Mitarbeiter.name, Mitarbeiter.vorname, Mitarbeiter.geschlecht, Mitarbeiter.geburt, Mitarbeiter.password,"
+          + " Einsatz.einsatzid, Einsatz.anfangszeit, Einsatz.endezeit"
+          + "  from Mitarbeiter JOIN Einsatz ON Mitarbeiter.mitarbeiterid = Einsatz.mitarbeiterid",
+      nativeQuery = true
+  )
+  @Modifying
+  @Transactional
+  public List<MitarbeiterEinsatzProjection> findAllEmployeeEinsatzDto();
 }

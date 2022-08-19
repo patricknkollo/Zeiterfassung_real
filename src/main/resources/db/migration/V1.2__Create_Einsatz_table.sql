@@ -5,5 +5,5 @@ create table Einsatz
     endeZeit      datetime,
     mitarbeiterid int NOT NULL,
     PRIMARY KEY (einsatzid),
-    FOREIGN KEY (mitarbeiterid) REFERENCES Einsatz (mitarbeiterid)
+    FOREIGN KEY (mitarbeiterid) REFERENCES Mitarbeiter (mitarbeiterid)
 );
