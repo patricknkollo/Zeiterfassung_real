@@ -1,7 +1,6 @@
 package com.einsatzstunden.demo.repositories;
 
 import com.einsatzstunden.demo.entities.Mitarbeiter;
-import com.einsatzstunden.demo.entities.MitarbeiterEinsatzArbeitsplaztDto;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;

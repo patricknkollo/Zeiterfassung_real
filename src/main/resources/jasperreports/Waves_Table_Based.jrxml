@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.19.1.final using JasperReports Library version 6.19.1-867c00bf88cd4d784d404379d6c05e1b419e8a4c  -->
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="employee" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="0" uuid="d82aab41-2f5b-484b-91d5-4a9d4481ecef">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Waves_Table_Based" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="0" uuid="d82aab41-2f5b-484b-91d5-4a9d4481ecef">
 	<property name="template.engine" value="tabular_template"/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Sample DB"/>
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
@@ -47,18 +47,17 @@
 	<style name="Table_CH_Label" style="SubTitle" mode="Opaque" forecolor="#FFFFFF" backcolor="#666666" fontSize="16" isBold="true">
 		<box leftPadding="2"/>
 	</style>
-	<subDataset name="tableDataset" uuid="ce3f1687-2e51-4c8e-8465-bf57dc8c6422">
+	<subDataset name="tableDataset" uuid="59db3d0c-fc02-49e1-be7f-44b60cdc7754">
 		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Sample DB"/>
-	<!--	<queryString language="SQL">
-			<![CDATA[select *
- from orders;]]>
-		</queryString>-->
-		<field name="mitarbeiterid" class="java.lang.Long"/>
+		<queryString language="SQL">
+			<![CDATA[select * from orders]]>
+		</queryString>
+		<field name="mitarbeiterid" class="java.lang.String"/>
 		<field name="name" class="java.lang.String"/>
 		<field name="vorname" class="java.lang.String"/>
-		<field name="einsatzid" class="java.lang.Long"/>
-		<field name="anfangsZeit" class="java.util.Date"/>
-		<field name="endeZeit" class="java.util.Date"/>
+		<field name="einsatzid" class="java.lang.String"/>
+		<field name="anfangsZeit" class="java.lang.String"/>
+		<field name="endeZeit" class="java.lang.String"/>
 	</subDataset>
 	<queryString>
 		<![CDATA[]]>
@@ -67,7 +66,7 @@
 		<band height="822" splitType="Stretch">
 			<image vAlign="Bottom">
 				<reportElement positionType="Float" mode="Transparent" x="-20" y="313" width="105" height="409" uuid="6be67a9c-1fb8-44ea-93c5-22c7de2c74ad"/>
-				<!--<imageExpression><![CDATA["waves.jpg"]]></imageExpression>-->
+			<!--	<imageExpression><![CDATA["waves.png"]]></imageExpression> -->
 			</image>
 			<frame>
 				<reportElement mode="Opaque" x="-20" y="722" width="105" height="100" forecolor="#666666" backcolor="#666666" uuid="dfcb00fc-8ad8-4868-a527-a80f5a7d143c"/>
@@ -102,23 +101,36 @@
 	<title>
 		<band height="152" splitType="Stretch">
 			<staticText>
-				<reportElement style="Title" x="0" y="0" width="555" height="115" uuid="8fd67f70-f5ac-4955-ad10-59058c6754ee"/>
-				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font size="34" isBold="false"/>
+				<reportElement style="Title" x="10" y="0" width="370" height="75" uuid="8fd67f70-f5ac-4955-ad10-59058c6754ee">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="25" isBold="false"/>
 				</textElement>
-				<text><![CDATA[Mitarbeiter]]></text>
+				<text><![CDATA[Employees report]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="SubTitle" x="234" y="115" width="321" height="37" uuid="64749d96-40f4-439e-92fc-8caf84f5a89b"/>
+				<reportElement style="SubTitle" x="234" y="38" width="321" height="37" uuid="64749d96-40f4-439e-92fc-8caf84f5a89b">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
 				<textElement textAlignment="Right">
-					<font size="18"/>
+					<font size="26"/>
 				</textElement>
-				<text><![CDATA[Mitarbeiter mit Einsaetze]]></text>
+				<text><![CDATA[DigiPEP]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="10" y="102" width="267" height="38" forecolor="#000000" uuid="2d5f849a-3a56-41da-92c0-f0327e655566"/>
+				<textElement>
+					<font size="18" isBold="false"/>
+				</textElement>
+				<text><![CDATA[employees and assignments]]></text>
 			</staticText>
 		</band>
 	</title>
 	<pageFooter>
-		<band height="100" splitType="Stretch">
+		<band height="300" splitType="Stretch">
 			<textField pattern="EEEEE dd MMMMM yyyy">
 				<reportElement style="Column header" x="424" y="0" width="131" height="20" forecolor="#000000" uuid="992e3b6c-3935-4c58-8f83-c2686a78adcd"/>
 				<textElement textAlignment="Right">
@@ -126,44 +138,32 @@
 				</textElement>
 				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>
-			<staticText>
-				<reportElement style="Column header" x="96" y="0" width="267" height="20" forecolor="#000000" uuid="2d5f849a-3a56-41da-92c0-f0327e655566"/>
-				<textElement>
-					<font size="12" isBold="false"/>
-				</textElement>
-				<text><![CDATA[Mitarbeiter Report]]></text>
-			</staticText>
-		</band>
-	</pageFooter>
-	<summary>
-		<band height="200" splitType="Stretch">
-			<property name="local_mesure_unitheight" value="pixel"/>
 			<componentElement>
-				<reportElement x="96" y="0" width="593" height="200" uuid="98a541ce-0e6c-4047-9ba4-e695c9035300">
+				<reportElement x="10" y="30" width="459" height="200" uuid="bbd5748c-575d-46dd-b8ed-f290e28fe429">
 					<property name="com.jaspersoft.studio.table.style.table_header" value="Table_TH"/>
 					<property name="com.jaspersoft.studio.table.style.column_header" value="Table_CH"/>
 					<property name="com.jaspersoft.studio.table.style.detail" value="Table_TD"/>
 				</reportElement>
 				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
-					<datasetRun subDataset="tableDataset" uuid="3060f3af-4e58-495d-8e57-1eb0b4652221">
+					<datasetRun subDataset="tableDataset" uuid="0a162ea2-e6aa-4c22-a0ef-f503f744d539">
 						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 					</datasetRun>
-					<jr:column width="120" uuid="d72236c1-02ef-4d99-ac3a-c0004e7ea451">
+					<jr:column width="76" uuid="8e9c8ffa-69aa-4e3d-8588-4e6993d324ac">
 						<jr:tableFooter style="Table_TH" height="30"/>
 						<jr:columnHeader style="Table_CH" height="25">
 							<staticText>
-								<reportElement key="" style="Table_CH_Label" x="0" y="0" width="120" height="25" uuid="7725b500-33ce-42d2-a71a-58d9b4fc1cba"/>
+								<reportElement key="" style="Table_CH_Label" x="0" y="0" width="76" height="25" uuid="4d2e7447-c24d-4c82-bc4c-33bf62e759d7"/>
 								<box leftPadding="2"/>
 								<textElement>
 									<font fontName="Arial" size="16" isBold="true"/>
 								</textElement>
-								<text><![CDATA[Mitarbeiterid]]></text>
+								<text><![CDATA[	Mitarbeiterid]]></text>
 							</staticText>
 						</jr:columnHeader>
 						<jr:columnFooter style="Table_CH" height="30"/>
 						<jr:detailCell style="Table_TD" height="25">
 							<textField>
-								<reportElement style="Detail" x="0" y="0" width="120" height="25" uuid="4190f2b7-96b8-4c28-8fee-505c7ea7a7bd"/>
+								<reportElement style="Detail" x="0" y="0" width="76" height="25" uuid="d7214154-a07a-4fee-8ec7-b8896005ac33"/>
 								<box leftPadding="2"/>
 								<textElement>
 									<font fontName="Arial" size="12"/>
@@ -172,11 +172,11 @@
 							</textField>
 						</jr:detailCell>
 					</jr:column>
-					<jr:column width="76" uuid="6ce5bd5d-f876-42b8-a4fa-76fcce8e26d0">
+					<jr:column width="76" uuid="ba4bdcda-807b-4583-934a-3c778f28f94d">
 						<jr:tableFooter style="Table_TH" height="30"/>
 						<jr:columnHeader style="Table_CH" height="25">
 							<staticText>
-								<reportElement key="" style="Table_CH_Label" x="0" y="0" width="76" height="25" uuid="5ff4e388-3a4c-418c-9e4e-19771edd9c52"/>
+								<reportElement key="" style="Table_CH_Label" x="0" y="0" width="76" height="25" uuid="219df081-6013-4d29-a0c1-2eb58716c777"/>
 								<box leftPadding="2"/>
 								<textElement>
 									<font fontName="Arial" size="16" isBold="true"/>
@@ -187,7 +187,7 @@
 						<jr:columnFooter style="Table_CH" height="30"/>
 						<jr:detailCell style="Table_TD" height="25">
 							<textField>
-								<reportElement style="Detail" x="0" y="0" width="76" height="25" uuid="e969e437-3b12-4274-a135-f2b068d9a73c"/>
+								<reportElement style="Detail" x="0" y="0" width="76" height="25" uuid="1711d0a7-0e4d-4e54-9c27-8a49490de7e6"/>
 								<box leftPadding="2"/>
 								<textElement>
 									<font fontName="Arial" size="12"/>
@@ -196,11 +196,11 @@
 							</textField>
 						</jr:detailCell>
 					</jr:column>
-					<jr:column width="76" uuid="bb1f4158-a905-43fe-91f0-ef36cfb6a0b0">
+					<jr:column width="76" uuid="9961778c-991e-4c56-bcbb-790d0c45f2f1">
 						<jr:tableFooter style="Table_TH" height="30"/>
 						<jr:columnHeader style="Table_CH" height="25">
 							<staticText>
-								<reportElement key="" style="Table_CH_Label" x="0" y="0" width="76" height="25" uuid="717da862-1528-429a-a738-f26a461af5dd"/>
+								<reportElement key="" style="Table_CH_Label" x="0" y="0" width="76" height="25" uuid="8a37a8c5-eac3-4878-96b1-7792c6e0163c"/>
 								<box leftPadding="2"/>
 								<textElement>
 									<font fontName="Arial" size="16" isBold="true"/>
@@ -211,7 +211,7 @@
 						<jr:columnFooter style="Table_CH" height="30"/>
 						<jr:detailCell style="Table_TD" height="25">
 							<textField>
-								<reportElement style="Detail" x="0" y="0" width="76" height="25" uuid="770dffdd-4300-4d34-9c62-4a616bf112c1"/>
+								<reportElement style="Detail" x="0" y="0" width="76" height="25" uuid="c481230d-7c25-4d14-86e1-8fd4c94e24f6"/>
 								<box leftPadding="2"/>
 								<textElement>
 									<font fontName="Arial" size="12"/>
@@ -220,22 +220,22 @@
 							</textField>
 						</jr:detailCell>
 					</jr:column>
-					<jr:column width="76" uuid="3b64b057-7ba0-4794-a626-13814cdb68de">
+					<jr:column width="76" uuid="98b08ab5-d526-4bee-8fd5-7cd358fbf1b3">
 						<jr:tableFooter style="Table_TH" height="30"/>
 						<jr:columnHeader style="Table_CH" height="25">
 							<staticText>
-								<reportElement key="" style="Table_CH_Label" x="0" y="0" width="76" height="25" uuid="d392ef37-ecd9-4733-86e9-59074470e2cb"/>
+								<reportElement key="" style="Table_CH_Label" x="0" y="0" width="76" height="25" uuid="37c0f0aa-15ae-46d2-9263-e67664c329ba"/>
 								<box leftPadding="2"/>
 								<textElement>
 									<font fontName="Arial" size="16" isBold="true"/>
 								</textElement>
-								<text><![CDATA[Einsatzid]]></text>
+								<text><![CDATA[EinsatzId]]></text>
 							</staticText>
 						</jr:columnHeader>
 						<jr:columnFooter style="Table_CH" height="30"/>
 						<jr:detailCell style="Table_TD" height="25">
 							<textField>
-								<reportElement style="Detail" x="0" y="0" width="76" height="25" uuid="4ae21e77-b5f6-421c-a8ac-07fda7cd7434"/>
+								<reportElement style="Detail" x="0" y="0" width="76" height="25" uuid="9bc90554-aaa9-4e01-8a83-8ca739d4bfbb"/>
 								<box leftPadding="2"/>
 								<textElement>
 									<font fontName="Arial" size="12"/>
@@ -244,22 +244,22 @@
 							</textField>
 						</jr:detailCell>
 					</jr:column>
-					<jr:column width="76" uuid="93ec0cb3-75d7-4bc8-a74f-30bb4b02645f">
+					<jr:column width="76" uuid="3085c3b5-bde6-4d0a-b7e6-f5fb14b71e75">
 						<jr:tableFooter style="Table_TH" height="30"/>
 						<jr:columnHeader style="Table_CH" height="25">
 							<staticText>
-								<reportElement key="" style="Table_CH_Label" x="0" y="0" width="76" height="25" uuid="a44903aa-b15f-43f6-b5c7-f9504ea62dd0"/>
+								<reportElement key="" style="Table_CH_Label" x="0" y="0" width="76" height="25" uuid="0b905957-d719-4ec0-8b39-3ebed2a0f3d4"/>
 								<box leftPadding="2"/>
 								<textElement>
 									<font fontName="Arial" size="16" isBold="true"/>
 								</textElement>
-								<text><![CDATA[Anfang]]></text>
+								<text><![CDATA[AnfangsZeit]]></text>
 							</staticText>
 						</jr:columnHeader>
 						<jr:columnFooter style="Table_CH" height="30"/>
 						<jr:detailCell style="Table_TD" height="25">
 							<textField>
-								<reportElement style="Detail" x="0" y="0" width="76" height="25" uuid="940cf491-cb08-436a-ada8-4d1f62d79da8"/>
+								<reportElement style="Detail" x="0" y="0" width="76" height="25" uuid="4a8d0747-660a-4f41-a96e-f57f8528ba1a"/>
 								<box leftPadding="2"/>
 								<textElement>
 									<font fontName="Arial" size="12"/>
@@ -268,22 +268,22 @@
 							</textField>
 						</jr:detailCell>
 					</jr:column>
-					<jr:column width="150" uuid="8338ac41-3c5a-4fd9-be63-647a5e88c859">
+					<jr:column width="76" uuid="10116000-9ca1-4772-9184-6f811875786a">
 						<jr:tableFooter style="Table_TH" height="30"/>
 						<jr:columnHeader style="Table_CH" height="25">
 							<staticText>
-								<reportElement key="" style="Table_CH_Label" x="0" y="0" width="150" height="25" uuid="31c85b00-b737-4b1f-81ca-5ada108e6a89"/>
+								<reportElement key="" style="Table_CH_Label" x="0" y="0" width="76" height="25" uuid="1805f422-9f27-4e75-a0d3-a9567ded4280"/>
 								<box leftPadding="2"/>
 								<textElement>
 									<font fontName="Arial" size="16" isBold="true"/>
 								</textElement>
-								<text><![CDATA[Ende]]></text>
+								<text><![CDATA[EndeZeit]]></text>
 							</staticText>
 						</jr:columnHeader>
 						<jr:columnFooter style="Table_CH" height="30"/>
 						<jr:detailCell style="Table_TD" height="25">
 							<textField>
-								<reportElement style="Detail" x="0" y="0" width="150" height="25" uuid="d1909bff-210f-4ce5-96bb-51da9748fa5f"/>
+								<reportElement style="Detail" x="0" y="0" width="76" height="25" uuid="4bd21b80-f881-46f7-8df4-dbd7dba36fe7"/>
 								<box leftPadding="2"/>
 								<textElement>
 									<font fontName="Arial" size="12"/>
@@ -294,6 +294,11 @@
 					</jr:column>
 				</jr:table>
 			</componentElement>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="200" splitType="Stretch">
+			<property name="local_mesure_unitheight" value="pixel"/>
 		</band>
 	</summary>
 </jasperReport>

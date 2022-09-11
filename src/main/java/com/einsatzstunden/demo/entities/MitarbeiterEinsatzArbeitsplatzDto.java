@@ -12,7 +12,7 @@ import java.util.Date;
 @Data
 @JsonInclude(JsonInclude.Include.ALWAYS)
 @ApiModel(description = "DTO contains the personal information for the employee displayed in the overview")
-public class MitarbeiterEinsatzArbeitsplaztDto {
+public class MitarbeiterEinsatzArbeitsplatzDto {
 
   @ApiModelProperty(notes = "employee ID")
   private Long mitarbeiterid;
